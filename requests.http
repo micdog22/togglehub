@@ -1,0 +1,23 @@
+
+### Create flag
+POST http://localhost:5210/api/flags
+Content-Type: application/json
+
+{
+  "key": "beta-checkout",
+  "description": "Checkout novo",
+  "enabled": true,
+  "rolloutPercent": 50,
+  "includeUserIds": ["vip-1","vip-2"],
+  "matchAnyAttributes": { "country": ["BR"], "plan": ["pro"] }
+}
+
+### Evaluate
+POST http://localhost:5210/api/evaluate
+Content-Type: application/json
+
+{
+  "flagKey": "beta-checkout",
+  "userId": "user-77",
+  "attributes": { "country": "BR", "plan": "free" }
+}
